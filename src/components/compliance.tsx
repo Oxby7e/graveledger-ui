@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FileCheck, Eye, Scale, UserPlus } from 'lucide-react';
 
 const trustItems = [
@@ -28,7 +28,7 @@ const trustItems = [
 ];
 
 export function Compliance() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -38,7 +38,7 @@ export function Compliance() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: { 
       opacity: 1, 

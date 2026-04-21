@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ShieldCheck, Globe, Cpu, Anchor, CheckCircle2 } from 'lucide-react';
 
 const highlights = [
@@ -35,7 +35,7 @@ const features = [
 ];
 
 export function USPPoles() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -45,7 +45,7 @@ export function USPPoles() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, x: 30 },
     visible: { 
       opacity: 1, 

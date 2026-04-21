@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Building2, Landmark, UserCircle2 } from 'lucide-react';
 
 const audiences = [
@@ -23,7 +23,7 @@ const audiences = [
 ];
 
 export function Audience() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -33,7 +33,7 @@ export function Audience() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: { 
       opacity: 1, 

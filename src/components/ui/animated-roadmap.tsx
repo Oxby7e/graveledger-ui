@@ -37,7 +37,7 @@ const MilestoneMarker = ({ milestone }: { milestone: Milestone }) => {
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
       whileHover={{ scale: 1.05, y: -5 }}
-      transition={{ duration: 0.5, delay: milestone.id * 0.1, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay: milestone.id * 0.1, ease: "easeOut" as const }}
       viewport={{ once: true, amount: 0.8 }}
       className="absolute flex items-center gap-4 cursor-default group"
       style={milestone.position}
@@ -82,7 +82,7 @@ const AnimatedRoadmap = React.forwardRef<HTMLDivElement, AnimatedRoadmapProps>(
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeOut" as const }}
           viewport={{ once: true, amount: 0.2 }}
           className="relative aspect-square md:aspect-video overflow-hidden rounded-3xl shadow-2xl border border-primary/10"
         >
