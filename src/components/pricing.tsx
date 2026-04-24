@@ -2,41 +2,57 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Users2, Settings, Milestone, Rocket, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
-const phases = [
+const plans = [
   {
-    number: "01",
-    title: "Cemetery Onboarding",
-    description:
-      "We conduct an initial consultation and gather all existing physical or digital records — paper registers, drawings, and burial certificates.",
-    icon: Users2,
-    duration: "Week 1–2",
+    name: "Families & Individuals",
+    description: "Honoring legacy for personal plots and small family trust grounds.",
+    price: "$0",
+    period: "forever",
+    features: [
+      "Up to 5 family users",
+      "Digital memorial access",
+      "Read-only record verification",
+      "Mobile scan support",
+    ],
+    cta: "Start for Free",
+    ctaLink: "/contact",
+    highlighted: false,
   },
   {
-    number: "02",
-    title: "Digital Setup & Mapping",
-    description:
-      "Cloud environment configuration and centimeter-accurate geotagging of all existing burial plots using satellite and ground survey data.",
-    icon: Settings,
-    duration: "Week 3–5",
+    name: "Trusts & Operators",
+    description: "Complete digital infrastructure for active cemetery management.",
+    price: "$2k",
+    period: "per month",
+    features: [
+      "Smart Pole hardware integration",
+      "Unlimited staff accounts",
+      "Centimeter-accurate geotagging",
+      "Operational reporting & audits",
+      "White-glove onboarding",
+    ],
+    cta: "Request Deployment",
+    ctaLink: "/contact",
+    highlighted: true,
   },
   {
-    number: "03",
-    title: "Smart Pole Installation",
-    description:
-      "Physical identification poles with QR/NFC identity are installed at each grave — the physical anchor of the system.",
-    icon: Milestone,
-    duration: "Week 4–6",
-  },
-  {
-    number: "04",
-    title: "Staff Training & Go-Live",
-    description:
-      "Comprehensive training for on-ground staff. We stay on-site until operations run independently. Full handover documentation provided.",
-    icon: Rocket,
-    duration: "Week 6–8",
+    name: "Enterprise / Commercial",
+    description: "High-volume data syncing tailored for government infrastructure.",
+    price: "API Based",
+    period: "custom volume pricing",
+    features: [
+      "Direct database synchronisation",
+      "Full GraphQL / REST API access",
+      "Bulk legacy data migration",
+      "Custom compliance integrations",
+      "Dedicated SLA support",
+    ],
+    cta: "Contact Enterprise",
+    ctaLink: "/contact",
+    highlighted: false,
   },
 ];
 
@@ -46,26 +62,19 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, x: 24 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
-
-const guarantees = [
-  "No disruption to daily operations",
-  "Full historical record continuity",
-  "Cloud-native and future-proof",
-  "Operational within 8 weeks",
-];
 
 export function Pricing() {
   return (
     <section
       id="deployment"
-      className="relative py-32 bg-card/30 section-rule overflow-hidden"
+      className="relative py-32 bg-background section-rule overflow-hidden"
     >
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-radial from-primary/6 to-transparent pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/5 to-transparent pointer-events-none rounded-full" />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -74,95 +83,86 @@ export function Pricing() {
           className="text-center max-w-2xl mx-auto mb-20"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary mb-6">
-            Deployment Process
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            Pricing & Tiers
           </div>
-          <h2 className="text-3xl font-black tracking-tight md:text-6xl leading-[1] mb-5">
-            Live in{" "}
-            <span className="text-gold-gradient italic">8 Weeks</span>.{" "}
-            Not Months.
+          <h2 className="text-3xl font-black tracking-tight md:text-5xl leading-[1.1] mb-5">
+            Scalable infrastructure.{" "}
+            <span className="text-primary italic">Clear costs.</span>
           </h2>
           <p className="text-muted-foreground font-light text-lg leading-relaxed">
-            We handle every step of the transition. You focus on management —
-            we handle the heavy lifting of digitization.
+            From individual family plots to national municipal networks, GraveLedger
+            scales seamlessly.
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-12 xl:gap-20">
-          {/* Timeline */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            className="flex-1 space-y-5"
-          >
-            {phases.map((phase, i) => (
-              <motion.div
-                key={i}
-                variants={itemVariants}
-                whileHover={{ x: 4 }}
-                className="group flex gap-6 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/25 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
-              >
-                {/* Number */}
-                <div className="shrink-0 text-center">
-                  <div className="w-12 h-12 rounded-xl border border-primary/20 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                    <phase.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
-                  </div>
-                </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+        >
+          {plans.map((plan, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className={`group flex flex-col p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden ${
+                plan.highlighted
+                  ? "border-primary/50 shadow-2xl shadow-primary/10 bg-card"
+                  : "border-border/50 bg-background hover:border-primary/30 hover:bg-card/50"
+              }`}
+            >
+              {plan.highlighted && (
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-radial from-primary/15 to-transparent rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              )}
 
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs font-black text-muted-foreground stat-number">
-                      {phase.number}
-                    </span>
-                    <h3 className="font-bold text-lg">{phase.title}</h3>
-                    <span className="ml-auto text-xs font-medium text-primary border border-primary/20 bg-primary/10 rounded-full px-3 py-0.5 shrink-0">
-                      {phase.duration}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
-                    {phase.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+              <div className="mb-8">
+                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                <p className="text-sm text-muted-foreground font-light leading-relaxed h-10">
+                  {plan.description}
+                </p>
+              </div>
 
-          {/* Right panel */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="w-full lg:w-72 xl:w-80 shrink-0"
-          >
-            <div className="sticky top-28 rounded-2xl border border-primary/20 bg-card p-8 glow-gold-sm">
-              <h3 className="font-bold text-xl mb-6 text-foreground">
-                What you get
-              </h3>
-              <div className="space-y-4 mb-8">
-                {guarantees.map((g, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
+              <div className="mb-8">
+                <div className="flex items-end gap-2">
+                  <span className="text-4xl font-black leading-none stat-number">
+                    {plan.price}
+                  </span>
+                </div>
+                <div className="text-xs text-muted-foreground mt-1 tracking-wide uppercase font-semibold">
+                  {plan.period}
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-4 mb-8">
+                {plan.features.map((feature, j) => (
+                  <div key={j} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-primary" />
                     </div>
-                    <span className="text-sm text-muted-foreground font-light leading-snug">
-                      {g}
+                    <span className="text-sm font-medium leading-snug">
+                      {feature}
                     </span>
                   </div>
                 ))}
               </div>
-              <hr className="hr-gradient mb-8" />
-              <Link
-                href="/contact"
-                className="group flex items-center justify-between w-full text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+
+              <Button
+                asChild
+                variant={plan.highlighted ? "default" : "outline"}
+                className={`w-full h-12 rounded-lg gap-2 text-sm font-semibold transition-all duration-300 ${
+                  plan.highlighted ? "shadow-primary/20 hover:shadow-primary/40" : ""
+                }`}
               >
-                Request a deployment quote
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </motion.div>
-        </div>
+                <Link href={plan.ctaLink}>
+                  {plan.cta}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

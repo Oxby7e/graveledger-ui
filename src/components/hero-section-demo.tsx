@@ -85,6 +85,7 @@ const HeroSectionDemo = () => {
           {/* <span className="text-gold-gradient italic">Every Legacy.</span> */}
           <br />
           <span>Legacies through</span>{" "}
+          <br />
           <span className="shimmer-text italic">Digital Mapping.</span>
         </motion.h1>
 
@@ -105,14 +106,14 @@ const HeroSectionDemo = () => {
         >
           <Link
             href="#how-it-works"
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 h-14 text-base font-bold text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:bg-primary/90 transition-all duration-300 hover:gap-3"
+            className="group inline-flex items-center gap-2 rounded-lg bg-foreground px-8 h-14 text-base font-bold text-background shadow-lg hover:shadow-primary/30 hover:bg-primary transition-all duration-300 hover:gap-3"
           >
             See How It Works
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             href="#pole-system"
-            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-background/40 backdrop-blur-md px-8 h-14 text-base font-bold text-foreground hover:bg-primary/10 hover:border-primary/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-transparent backdrop-blur-md px-8 h-14 text-base font-bold text-foreground hover:text-primary hover:border-primary transition-all duration-300"
           >
             Explore Smart Poles
           </Link>
@@ -135,7 +136,7 @@ const HeroSectionDemo = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="relative z-20 w-full border-t border-border/50 bg-background/80 backdrop-blur-md"
+        className="relative z-20 w-full bg-background/80 backdrop-blur-md"
       >
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 divide-x divide-border/50">
           {stats.map((stat, i) => (

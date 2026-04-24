@@ -58,7 +58,7 @@ export function Header() {
 					<Button variant="ghost" className="rounded-full text-sm">
 						Sign In
 					</Button>
-					<Button className="rounded-full text-sm gap-2 shadow-md shadow-primary/20 hover:shadow-primary/40 transition-shadow">
+					<Button className="rounded-lg text-sm gap-2">
 						Get Started
 						<ArrowRight className="w-3.5 h-3.5" />
 					</Button>
@@ -103,7 +103,7 @@ export function Header() {
 						<Button variant="outline" className="w-full h-12 rounded-xl text-base">
 							Sign In
 						</Button>
-						<Button className="w-full h-12 rounded-xl text-base gap-2">
+						<Button className="w-full h-12 rounded-lg text-base gap-2">
 							Get Started
 							<ArrowRight className="w-4 h-4" />
 						</Button>
@@ -116,8 +116,8 @@ export function Header() {
 
 export const WordmarkIcon = (props: React.ComponentProps<'div'>) => (
 	<Link href="/" className={cn('flex items-center gap-2.5 group', props.className)}>
-		<div className="relative w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-md shadow-primary/30 group-hover:shadow-primary/50 transition-shadow">
-			<Scroll className="h-4 w-4 text-primary-foreground" />
+		<div className="relative w-8 h-8 rounded-lg bg-foreground flex items-center justify-center shadow-md group-hover:shadow-primary/30 group-hover:bg-primary transition-all duration-300">
+			<Scroll className="h-4 w-4 text-background group-hover:text-primary-foreground transition-colors" />
 		</div>
 		<span className="text-lg font-black tracking-tight text-foreground">
 			Grave<span className="text-primary">Ledger</span>
