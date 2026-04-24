@@ -1,117 +1,125 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Search, FileText, MapPin, Navigation } from 'lucide-react';
+import { Search, FileText, MapPin, Navigation } from "lucide-react";
 
-const steps = [
+const journey = [
   {
-    title: "Enter Name or Scan Pole",
-    description: "Instantly retrieve the burial record through a simple search or quick scan.",
-    icon: Search
+    action: "Enter name or scan pole",
+    result: "Burial record retrieved in under 3 seconds",
+    icon: Search,
+    connector: true,
   },
   {
-    title: "Retrieve Burial Record",
-    description: "Access structured data including name, date, and document attachments.",
-    icon: FileText
+    action: "View structured record",
+    result: "Name, date, section, document attachments",
+    icon: FileText,
+    connector: true,
   },
   {
-    title: "View Exact Grave Location",
-    description: "See the precise geotagged location within the cemetery's digital map.",
-    icon: MapPin
+    action: "See exact grave location",
+    result: "Precise coordinate on cemetery digital map",
+    icon: MapPin,
+    connector: true,
   },
   {
-    title: "Navigate Within Cemetery",
-    description: "Follow real-time navigation cues to find the grave with centimeter-level accuracy.",
-    icon: Navigation
-  }
+    action: "Navigate within cemetery",
+    result: "Real-time turn-by-turn to the grave",
+    icon: Navigation,
+    connector: false,
+  },
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring", stiffness: 90, damping: 16 },
+  },
+};
+
 export function RealUseCase() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.5 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 15 }
-    },
-  };
-
-  const lineVariants: Variants = {
-    hidden: { scaleX: 0 },
-    visible: { 
-      scaleX: 1,
-      transition: { duration: 1.5, ease: "easeInOut", delay: 0.2 }
-    }
-  };
-
   return (
-    <section id="use-case" className="py-24 bg-background border-y">
+    <section
+      id="use-case"
+      className="relative py-32 bg-card/40 section-rule overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] bg-gradient-radial from-primary/5 to-transparent rounded-full" />
+      </div>
+
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-2xl mx-auto mb-24"
         >
-          <h2 className="text-3xl font-bold tracking-tight md:text-5xl mb-4">Locate a Grave in <span className="text-primary italic font-serif">Seconds</span></h2>
-          <p className="text-muted-foreground font-light max-w-2xl mx-auto text-lg text-pretty">
-             Experience a frictionless visitor journey. No dependency on staff. No manual searching. Fully accessible anytime, anywhere.
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary mb-6">
+            Visitor Flow
+          </div>
+          <h2 className="text-3xl font-black tracking-tight md:text-6xl leading-[1] mb-5">
+            Locate a Grave in{" "}
+            <span className="text-gold-gradient italic">Under 10 Seconds</span>
+          </h2>
+          <p className="text-muted-foreground font-light text-lg leading-relaxed">
+            No staff required. No manual directory. No wrong turns. Just scan,
+            search, and navigate.
           </p>
         </motion.div>
-        
-        <div className="relative">
-          {/* Connecting line for desktop */}
-          <motion.div 
-            variants={lineVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent -translate-y-12 z-0 origin-left" 
-          />
-          
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative"
-          >
-            {steps.map((item, i) => (
-              <motion.div 
-                key={i} 
-                variants={itemVariants}
-                className="relative z-10 flex flex-col items-center text-center p-6 space-y-4"
-              >
-                <motion.div 
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20 border-4 border-background"
-                >
-                   <item.icon className="w-8 h-8" />
-                </motion.div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-light">
-                    {item.description}
-                  </p>
+
+        {/* Timeline journey */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="max-w-4xl mx-auto"
+        >
+          {journey.map((step, i) => (
+            <motion.div key={i} variants={itemVariants} className="relative">
+              <div className="flex items-start gap-6 md:gap-10">
+                {/* Icon + connector column */}
+                <div className="flex flex-col items-center">
+                  <div className="w-14 h-14 rounded-2xl border border-primary/30 bg-primary/10 flex items-center justify-center text-primary shrink-0 glow-gold-sm">
+                    <step.icon className="w-6 h-6" />
+                  </div>
+                  {step.connector && (
+                    <div className="w-px flex-1 min-h-[3rem] bg-gradient-to-b from-primary/30 to-transparent mt-2" />
+                  )}
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+
+                {/* Content */}
+                <div className={`pb-${step.connector ? "10" : "0"} flex-1`}>
+                  <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/20 hover:shadow-lg transition-all duration-300">
+                    <div className="flex-1">
+                      <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">
+                        Step {i + 1}
+                      </div>
+                      <h3 className="text-lg font-bold text-foreground">
+                        {step.action}
+                      </h3>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-emerald-400 font-medium bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      {step.result}
+                    </div>
+                  </div>
+                  {step.connector && <div className="h-4" />}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
 }
-

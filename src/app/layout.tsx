@@ -1,23 +1,40 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Header } from "@/components/ui/header-2";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "GraveLedger | Digital Cemetery Mapping",
-  description: "Digital Burial Record & Cemetery Mapping Platform",
+  title: "GraveLedger | Digital Cemetery Infrastructure",
+  description:
+    "GraveLedger replaces paper-based burial registers with structured, mapped, and permanently verifiable burial infrastructure — powered by Smart Poles and digital mapping.",
+  keywords: [
+    "cemetery management",
+    "burial records",
+    "digital cemetery",
+    "grave identification",
+    "smart pole",
+    "GraveLedger",
+  ],
+  openGraph: {
+    title: "GraveLedger | Digital Cemetery Infrastructure",
+    description:
+      "Every grave identified. Every record preserved. Built for cemeteries, municipalities, and families.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -29,17 +46,19 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body
+        className="min-h-full flex flex-col"
+        style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
           <Header />
-          <ModeToggle />
           {children}
         </ThemeProvider>
       </body>

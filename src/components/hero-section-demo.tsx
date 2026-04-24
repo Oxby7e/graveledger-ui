@@ -2,7 +2,15 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight, ChevronDown } from "lucide-react";
+
+const stats = [
+  { value: "2M+", label: "Graves Unlocated Annually" },
+  { value: "68%", label: "Cemeteries Still Paper-Based" },
+  { value: "40yr", label: "Average Record Lifespan" },
+  { value: "0", label: "Standard Identification System" },
+];
 
 const HeroSectionDemo = () => {
   const containerVariants: Variants = {
@@ -10,114 +18,148 @@ const HeroSectionDemo = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.4,
+        staggerChildren: 0.18,
+        delayChildren: 0.3,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 28 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 15 },
+      transition: { type: "spring", stiffness: 90, damping: 18 },
     },
   };
 
   return (
-    <div className="w-full min-h-[90vh] flex items-center justify-center bg-background text-foreground overflow-hidden relative">
-      {/* Dynamic Background Image with Motion */}
+    <div className="relative w-full min-h-screen flex flex-col overflow-hidden bg-background">
+      {/* ── Full-bleed background ── */}
       <div className="absolute inset-0 z-0">
         <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{
-            scale: [1.1, 1],
-            opacity: 1,
-          }}
-          transition={{
-            duration: 2,
-            ease: "easeOut",
-          }}
+          initial={{ scale: 1.08, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2.2, ease: "easeOut" }}
           className="absolute inset-0"
         >
           <Image
             src="/hero-scene.png"
-            alt="Digital Cemetery Infrastructure Visualization"
+            alt="Digital Cemetery Infrastructure"
             fill
-            className="object-cover opacity-60 dark:opacity-40 grayscale-[20%] dark:grayscale-[40%]"
+            className="object-cover"
             priority
           />
         </motion.div>
 
-        {/* Sophisticated Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 z-10" />
+        {/* Layered overlays for cinematic depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/50 to-background z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/40 z-10" />
+        {/* Dark top-left atmospheric shadow */}
+        <div className="absolute top-0 left-0 w-[50vw] h-[50vh] bg-gradient-radial from-primary/5 to-transparent z-10" />
       </div>
 
-      {/* Container for the Hero Content */}
+      {/* ── Scanline detail ── */}
+      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+        <div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+          style={{ top: "30%" }}
+        />
+        <div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+          style={{ top: "60%" }}
+        />
+      </div>
+
+      {/* ── Hero content ── */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="container mx-auto flex flex-col items-center px-4 py-24 text-center relative z-20"
+        className="relative z-20 flex flex-col items-center justify-center flex-1 px-4 pt-32 pb-20 text-center container mx-auto"
       >
-        <motion.div
-          variants={itemVariants}
-          className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-6 backdrop-blur-sm shadow-xl shadow-primary/5"
-        >
-          GraveLedger Innovation
+        {/* Badge */}
+        <motion.div variants={itemVariants}>
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold tracking-widest text-primary uppercase mb-8 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            GraveLedger — Infrastructure for the Sacred
+          </span>
         </motion.div>
 
+        {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-3xl font-black tracking-tight md:text-6xl lg:text-9xl max-w-6xl text-balance leading-[0.95] drop-shadow-2xl"
+          className="text-4xl font-black tracking-tight md:text-7xl lg:text-[7.5rem] leading-[0.92] max-w-6xl text-balance text-foreground"
         >
-          Honoring Legacies through{" "}
-          <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent italic">
-            Digital Mapping
-          </span>
+          Honoring{" "}
+          {/* <span className="text-gold-gradient italic">Every Legacy.</span> */}
+          <br />
+          <span>Legacies through</span>{" "}
+          <span className="shimmer-text italic">Digital Mapping.</span>
         </motion.h1>
 
+        {/* Sub-copy */}
         <motion.p
           variants={itemVariants}
-          className="mt-10 max-w-3xl text-lg text-muted-foreground md:text-2xl text-pretty font-light leading-relaxed"
+          className="mt-8 max-w-2xl text-base md:text-xl text-foreground/90 font-light leading-relaxed text-pretty"
         >
           Seamlessly digitizing cemetery records and providing interactive
           mapping for a sacred, intuitive experience. Bringing the past into the
-          future.{" "}
+          future.
         </motion.p>
 
-        {/* <motion.p
-          variants={itemVariants}
-          className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg text-pretty opacity-80"
-        >
-          From paper registers to structured, searchable, and verifiable burial
-          data—accessible in seconds.
-        </motion.p> */}
-
+        {/* CTAs */}
         <motion.div
           variants={itemVariants}
-          className="mt-12 flex flex-wrap justify-center gap-6"
+          className="mt-12 flex flex-wrap justify-center gap-4"
         >
-          <Button
-            size="lg"
-            className="rounded-full px-10 h-14 text-lg font-bold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all hover:scale-105 active:scale-95"
-          >
-            Request Demo
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full px-10 h-14 text-lg font-bold border-primary/20 bg-background/50 backdrop-blur-md hover:bg-primary/5 hover:scale-105 active:scale-95 shadow-xl"
+          <Link
+            href="#how-it-works"
+            className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 h-14 text-base font-bold text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:bg-primary/90 transition-all duration-300 hover:gap-3"
           >
             See How It Works
-          </Button>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+          <Link
+            href="#pole-system"
+            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-background/40 backdrop-blur-md px-8 h-14 text-base font-bold text-foreground hover:bg-primary/10 hover:border-primary/50 transition-all duration-300"
+          >
+            Explore Smart Poles
+          </Link>
+        </motion.div>
+
+        {/* Scroll cue */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-20 flex flex-col items-center gap-2 opacity-50"
+        >
+          <span className="text-xs tracking-widest uppercase text-muted-foreground">
+            Scroll
+          </span>
+          <ChevronDown className="w-4 h-4 text-muted-foreground animate-bounce" />
         </motion.div>
       </motion.div>
 
-      {/* Ambient bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-30" />
+      {/* ── Stats strip ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="relative z-20 w-full border-t border-border/50 bg-background/80 backdrop-blur-md"
+      >
+        <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 divide-x divide-border/50">
+          {stats.map((stat, i) => (
+            <div key={i} className="px-6 py-6 text-center">
+              <div className="text-2xl md:text-4xl font-black text-gold-gradient stat-number">
+                {stat.value}
+              </div>
+              <div className="text-xs text-foreground mt-1 font-medium tracking-wide">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };

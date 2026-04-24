@@ -1,102 +1,150 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import { motion, Variants } from "framer-motion";
-import { AlertCircle, Search, Map, FileText, XCircle } from 'lucide-react';
+import { TrendingDown, FileX, MapPinOff, UserX } from "lucide-react";
 
-const problems = [
+const crises = [
   {
-    title: "Loss of Grave Locations",
-    description: "Physical burial markers and informal tracking lead to the loss of exact grave locations over time.",
-    icon: Map
+    stat: "68%",
+    label: "of cemeteries have no digital system",
+    detail:
+      "Paper registers remain the primary — often only — source of burial information in most municipalities.",
+    icon: FileX,
+    color: "from-red-500/10 to-red-500/5",
+    borderColor: "border-red-500/20",
+    statColor: "text-red-400",
   },
   {
-    title: "Incomplete/Damaged Records",
-    description: "Manual registers are prone to damage, loss, or incomplete data entry, making audits impossible.",
-    icon: FileText
+    stat: "1 in 3",
+    label: "records are incomplete or inaccurate",
+    detail:
+      "Manual data entry errors, torn pages, and water-damaged registers leave families and administrators without answers.",
+    icon: TrendingDown,
+    color: "from-orange-500/10 to-orange-500/5",
+    borderColor: "border-orange-500/20",
+    statColor: "text-orange-400",
   },
   {
-    title: "Difficulty in Audits",
-    description: "No standardized system for identification makes verification and regulatory compliance a nightmare.",
-    icon: XCircle
+    stat: "40+ yrs",
+    label: "before physical markers deteriorate",
+    detail:
+      "Without a digital anchor, grave markers fade, fall, or are relocated — severing the only identity link.",
+    icon: MapPinOff,
+    color: "from-amber-500/10 to-amber-500/5",
+    borderColor: "border-amber-500/20",
+    statColor: "text-amber-400",
   },
   {
-    title: "Navigation Challenges",
-    description: "Families are often unable to locate graves after years, creating a disconnected experience.",
-    icon: Search
-  }
+    stat: "0 std.",
+    label: "global identification protocol exists",
+    detail:
+      "No universal format, no interoperability, no way to verify burial records across institutions.",
+    icon: UserX,
+    color: "from-rose-500/10 to-rose-500/5",
+    borderColor: "border-rose-500/20",
+    statColor: "text-rose-400",
+  },
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+};
+
 export function ProblemStatement() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 0.5, ease: "easeOut" }
-    },
-  };
-
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="relative py-32 bg-background overflow-hidden section-rule">
+      {/* Background accent */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial from-destructive/5 to-transparent pointer-events-none" />
+
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="w-full lg:w-1/2"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1 text-sm font-medium text-destructive mb-6">
-              <AlertCircle className="w-4 h-4" />
-              Why This System Is Needed
-            </div>
-            <h2 className="text-3xl font-bold tracking-tight md:text-5xl mb-6">
-              Most burial systems today rely on <span className="text-destructive font-serif italic">manual registers</span> and informal tracking.
-            </h2>
-            <p className="text-lg text-muted-foreground font-light mb-8 leading-relaxed">
-              We solve this by creating a structured, mapped, and verifiable burial infrastructure that stands the test of time.
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6"
-          >
-            {problems.map((problem, i) => (
-              <motion.div 
-                key={i} 
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-                className="p-6 rounded-2xl border border-destructive/10 bg-destructive/[0.02] flex flex-col gap-4 items-start hover:bg-destructive shadow-sm hover:shadow-destructive/10 transition-all duration-300 group"
-              >
-                <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center text-destructive shrink-0 group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">
-                  <problem.icon className="w-5 h-5" />
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto text-center mb-20"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-destructive/30 bg-destructive/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-destructive mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" />
+            The Crisis We Solve
+          </div>
+
+          <h2 className="text-3xl font-black tracking-tight md:text-6xl leading-[1] text-balance mb-6">
+            Burial infrastructure is{" "}
+            <span className="italic text-destructive">broken</span> and{" "}
+            <span className="italic text-destructive">invisible</span>.
+          </h2>
+
+          <p className="text-lg text-foreground font-light leading-relaxed">
+            Across governments, religious institutions, and private cemeteries —
+            the systems for recording who is buried, where, and in what
+            condition are failing silently. Families are losing legacies.
+            Administrators are losing accountability.
+          </p>
+        </motion.div>
+
+        {/* Crisis cards */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {crises.map((crisis, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              whileHover={{ y: -4 }}
+              className={`relative group p-8 rounded-2xl border ${crisis.borderColor} bg-gradient-to-br ${crisis.color} overflow-hidden transition-all duration-300 hover:shadow-xl`}
+            >
+              {/* Oversized icon background */}
+              <crisis.icon className="absolute -right-6 -bottom-6 w-32 h-32 text-current opacity-[0.04] group-hover:opacity-[0.07] transition-opacity" />
+
+              <div className="relative z-10">
+                <div
+                  className={`text-5xl md:text-6xl font-black ${crisis.statColor} stat-number mb-3 leading-none`}
+                >
+                  {crisis.stat}
                 </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1 group-hover:text-white transition-colors duration-300">{problem.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-white/80 transition-colors duration-300">{problem.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                <h3 className="font-bold text-xl mb-3 text-foreground">
+                  {crisis.label}
+                </h3>
+                <p className="text-sm text-foreground/90 leading-relaxed font-light">
+                  {crisis.detail}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Transitional statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mt-20 max-w-3xl mx-auto text-center"
+        >
+          <hr className="hr-gradient mb-12" />
+          <p className="text-xl md:text-2xl font-light text-foreground leading-relaxed text-balance">
+            GraveLedger replaces the fragile paper-and-memory system with a
+            structured, mapped, and{" "}
+            <span className="text-gold-gradient font-semibold">
+              permanently verifiable burial infrastructure
+            </span>{" "}
+            that stands the test of time.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
 }
-

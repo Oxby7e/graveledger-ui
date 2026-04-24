@@ -5,6 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
@@ -40,48 +44,64 @@
 
 @layer base {
   :root {
+    /* Light mode – Purest possible contrast */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --popover-foreground: 0 0% 0%;
+    /* Black primary for minimal aesthetic */
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 15%;
+    --accent: 40 50% 92%;
+    --accent-foreground: 40 75% 20%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 40 75% 40%;
+    --radius: 0.75rem;
+
+    /* Theme-aware accents - Now Black */
+    --gold-gradient-start: 0 0% 0%;
+    --gold-gradient-end: 0 0% 10%;
+    --glow-color: 0 0% 0% / 0.15;
+    --border-accent: 0 0% 0% / 0.2;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Dark mode – deep observatory charcoal with gold */
+    --background: 222 28% 7%;
+    --foreground: 210 20% 92%;
+    --card: 222 24% 10%;
+    --card-foreground: 210 20% 92%;
+    --popover: 222 24% 9%;
+    --popover-foreground: 210 20% 92%;
+    /* Gold primary stays */
+    --primary: 40 70% 58%;
+    --primary-foreground: 222 28% 7%;
+    --secondary: 222 20% 15%;
+    --secondary-foreground: 210 20% 80%;
+    --muted: 222 20% 14%;
+    --muted-foreground: 220 10% 50%;
+    --accent: 40 30% 16%;
+    --accent-foreground: 40 70% 70%;
+    --destructive: 5 70% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 18% 17%;
+    --input: 222 20% 14%;
+    --ring: 40 70% 58%;
+
+    /* Theme-aware accents - Gold */
+    --gold-gradient-start: 40 80% 65%;
+    --gold-gradient-end: 35 70% 50%;
+    --glow-color: 40 70% 58% / 0.25;
+    --border-accent: 40 70% 58% / 0.4;
   }
 }
 
@@ -89,7 +109,136 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+  ::selection {
+    background-color: hsl(40 70% 58% / 0.3);
+  }
+}
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+@layer utilities {
+  /* Radial gradients (not in Tailwind v4 by default) */
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+
+  /* Glassmorphism surfaces */
+  .glass {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-dark {
+    background: hsl(222 28% 5% / 0.7);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    border: 1px solid hsl(40 60% 54% / 0.15);
+  }
+
+  /* Gold glow utilities */
+  .glow-gold {
+    box-shadow: 0 0 40px hsl(var(--glow-color)), 0 0 80px hsl(var(--glow-color));
+  }
+
+  .glow-gold-sm {
+    box-shadow: 0 0 20px hsl(var(--glow-color));
+  }
+
+  /* Section dividers */
+  .section-rule {
+    border-top: 1px solid hsl(var(--border) / 0.6);
+  }
+
+  /* Number display */
+  .stat-number {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* Text gradients */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, hsl(var(--gold-gradient-start)), hsl(var(--gold-gradient-end)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-silver-gradient {
+    background: linear-gradient(135deg, hsl(210 20% 92%), hsl(210 10% 65%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Edge accent borders */
+  .border-gold {
+    border-color: hsl(var(--border-accent));
+  }
+
+  .border-gold-strong {
+    border-color: hsl(var(--border-accent));
+  }
+
+  /* Noise texture overlay */
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Horizontal rule with gradient */
+  .hr-gradient {
+    height: 1px;
+    background: linear-gradient(to right, transparent, hsl(0 0% 0% / 0.15), transparent);
+    border: none;
+  }
+}
+
+/* ─── Custom Animations ──────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--glow-color)); }
+  50% { box-shadow: 0 0 40px hsl(var(--glow-color)); }
+}
+
+@keyframes scan-line {
+  0% { top: -2px; }
+  100% { top: 100%; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, hsl(0 0% 0%) 0%, hsl(0 0% 40%) 40%, hsl(0 0% 0%) 80%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
 }

@@ -1,114 +1,112 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { useScroll } from '@/components/ui/use-scroll';
+import { Scroll, ArrowRight } from 'lucide-react';
 
 export function Header() {
 	const [open, setOpen] = React.useState(false);
-	const scrolled = useScroll(10);
+	const scrolled = useScroll(20);
 
 	const links = [
-		{
-			label: 'How It Works',
-			href: '#how-it-works',
-		},
-		{
-			label: 'Features',
-			href: '#features',
-		},
-		{
-			label: 'Smart Poles',
-			href: '#pole-system',
-		},
-		{
-			label: 'Deployment',
-			href: '#deployment',
-		},
+		{ label: 'Problem', href: '#' },
+		{ label: 'How It Works', href: '#how-it-works' },
+		{ label: 'Features', href: '#features' },
+		{ label: 'Smart Poles', href: '#pole-system' },
+		{ label: 'Deployment', href: '#deployment' },
 	];
 
 	React.useEffect(() => {
-		if (open) {
-			// Disable scroll
-			document.body.style.overflow = 'hidden';
-		} else {
-			// Re-enable scroll
-			document.body.style.overflow = '';
-		}
-
-		// Cleanup when component unmounts (important for Next.js)
-		return () => {
-			document.body.style.overflow = '';
-		};
+		document.body.style.overflow = open ? 'hidden' : '';
+		return () => { document.body.style.overflow = ''; };
 	}, [open]);
 
 	return (
 		<header
 			className={cn(
-				'sticky top-0 z-50 mx-auto w-full max-w-5xl border-b border-transparent md:rounded-md md:border md:transition-all md:ease-out',
-				{
-					'bg-background/95 supports-[backdrop-filter]:bg-background/50 border-border backdrop-blur-lg md:top-4 md:max-w-4xl md:shadow':
-						scrolled && !open,
-					'bg-background/90': open,
-				},
+				'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out',
+				scrolled && !open
+					? 'bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm shadow-black/5'
+					: 'bg-transparent',
 			)}
 		>
-			<nav
-				className={cn(
-					'flex h-14 w-full items-center justify-between px-4 md:h-12 md:transition-all md:ease-out',
-					{
-						'md:px-2': scrolled,
-					},
-				)}
-			>
+			<nav className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+				{/* Wordmark */}
 				<WordmarkIcon />
-				<div className="hidden items-center gap-2 md:flex">
+
+				{/* Desktop nav */}
+				<div className="hidden items-center gap-1 md:flex">
 					{links.map((link, i) => (
-						<a key={i} className={buttonVariants({ variant: 'ghost' })} href={link.href}>
+						<a
+							key={i}
+							href={link.href}
+							className={cn(
+								buttonVariants({ variant: 'ghost' }),
+								'text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full px-4',
+							)}
+						>
 							{link.label}
 						</a>
 					))}
-					<Button variant="outline">Sign In</Button>
-					<Button>Get Started</Button>
 				</div>
-				<Button size="icon" variant="outline" onClick={() => setOpen(!open)} className="md:hidden">
-					<MenuToggleIcon open={open} className="size-5" duration={300} />
+
+				{/* Desktop CTA */}
+				<div className="hidden md:flex items-center gap-3">
+					<Button variant="ghost" className="rounded-full text-sm">
+						Sign In
+					</Button>
+					<Button className="rounded-full text-sm gap-2 shadow-md shadow-primary/20 hover:shadow-primary/40 transition-shadow">
+						Get Started
+						<ArrowRight className="w-3.5 h-3.5" />
+					</Button>
+				</div>
+
+				{/* Mobile hamburger */}
+				<Button
+					size="icon"
+					variant="ghost"
+					onClick={() => setOpen(!open)}
+					className="md:hidden rounded-xl"
+					id="mobile-menu-toggle"
+				>
+					<MenuToggleIcon open={open} className="size-5" duration={280} />
 				</Button>
 			</nav>
 
+			{/* Mobile drawer */}
 			<div
 				className={cn(
-					'bg-background/90 fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y md:hidden',
-					open ? 'block' : 'hidden',
+					'fixed inset-0 top-16 z-40 bg-background/95 backdrop-blur-xl border-t border-border/50 md:hidden transition-all duration-300',
+					open ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none',
 				)}
 			>
-				<div
-					data-slot={open ? 'open' : 'closed'}
-					className={cn(
-						'data-[slot=open]:animate-in data-[slot=open]:zoom-in-95 data-[slot=closed]:animate-out data-[slot=closed]:zoom-out-95 ease-out',
-						'flex h-full w-full flex-col justify-between gap-y-2 p-4',
-					)}
-				>
-					<div className="grid gap-y-2">
+				<div className="flex h-full flex-col justify-between gap-4 p-6">
+					<div className="grid gap-1">
 						{links.map((link) => (
 							<a
 								key={link.label}
+								href={link.href}
+								onClick={() => setOpen(false)}
 								className={buttonVariants({
 									variant: 'ghost',
-									className: 'justify-start',
+									className: 'justify-start text-base h-12 rounded-xl',
 								})}
-								href={link.href}
 							>
 								{link.label}
 							</a>
 						))}
 					</div>
-					<div className="flex flex-col gap-2">
-						<Button variant="outline" className="w-full">
+					<div className="flex flex-col gap-3 pb-8">
+						<Button variant="outline" className="w-full h-12 rounded-xl text-base">
 							Sign In
 						</Button>
-						<Button className="w-full">Get Started</Button>
+						<Button className="w-full h-12 rounded-xl text-base gap-2">
+							Get Started
+							<ArrowRight className="w-4 h-4" />
+						</Button>
 					</div>
 				</div>
 			</div>
@@ -116,15 +114,13 @@ export function Header() {
 	);
 }
 
-import { Scroll } from 'lucide-react';
-
-export const WordmarkIcon = (props: React.ComponentProps<"div">) => (
-	<div className={cn("flex items-center gap-2", props.className)}>
-		<div className="bg-primary p-1 rounded-md">
-			<Scroll className="h-5 w-5 text-primary-foreground" />
+export const WordmarkIcon = (props: React.ComponentProps<'div'>) => (
+	<Link href="/" className={cn('flex items-center gap-2.5 group', props.className)}>
+		<div className="relative w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-md shadow-primary/30 group-hover:shadow-primary/50 transition-shadow">
+			<Scroll className="h-4 w-4 text-primary-foreground" />
 		</div>
-		<span className="text-xl font-black tracking-tighter text-foreground">
+		<span className="text-lg font-black tracking-tight text-foreground">
 			Grave<span className="text-primary">Ledger</span>
 		</span>
-	</div>
+	</Link>
 );
