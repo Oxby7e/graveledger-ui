@@ -59,8 +59,6 @@ const HeroSectionDemo = () => {
         <div className="absolute top-0 left-0 w-[50vw] h-[50vh] bg-gradient-radial from-primary/5 to-transparent z-10" />
       </div>
 
-
-
       {/* ── Hero content ── */}
       <motion.div
         variants={containerVariants}
@@ -84,9 +82,11 @@ const HeroSectionDemo = () => {
           Honoring{" "}
           {/* <span className="text-gold-gradient italic">Every Legacy.</span> */}
           <br />
-          <span>Legacies through</span>{" "}
+          <span className="inline-block mb-4 md:mb-4 lg:mb-4">
+            Legacies through
+          </span>{" "}
           <br />
-          <span className="shimmer-text italic">Digital Mapping.</span>
+          <span className="shimmer-text italic  ">Digital Mapping.</span>
         </motion.h1>
 
         {/* Sub-copy */}
