@@ -59,17 +59,7 @@ const HeroSectionDemo = () => {
         <div className="absolute top-0 left-0 w-[50vw] h-[50vh] bg-gradient-radial from-primary/5 to-transparent z-10" />
       </div>
 
-      {/* ── Scanline detail ── */}
-      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-        <div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-          style={{ top: "30%" }}
-        />
-        <div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-          style={{ top: "60%" }}
-        />
-      </div>
+
 
       {/* ── Hero content ── */}
       <motion.div

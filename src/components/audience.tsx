@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Building2, Landmark, Users } from "lucide-react";
 
 const audiences = [
   {
@@ -11,7 +10,6 @@ const audiences = [
     tagline: "Modernize your register system.",
     description:
       "Replace error-prone paper processes with a digital-first burial management workflow. Track every grave, every pole, every record — with accountability built in.",
-    icon: Building2,
     stats: [
       { value: "100%", label: "Record Traceability" },
       { value: "3×", label: "Faster Audits" },
@@ -26,7 +24,6 @@ const audiences = [
     tagline: "Compliance-ready from day one.",
     description:
       "Centralized burial database across all cemeteries in your jurisdiction. Generate regulatory reports instantly. Prove accountability to governing bodies.",
-    icon: Landmark,
     stats: [
       { value: "Multi", label: "Site Control" },
       { value: "Real-time", label: "Reporting" },
@@ -42,7 +39,6 @@ const audiences = [
     tagline: "Find your loved ones. Instantly.",
     description:
       "No more staff dependency, no manual directory searching. Scan a pole or type a name — and navigate directly to the grave with real-time precision.",
-    icon: Users,
     stats: [
       { value: "<5s", label: "Grave Location" },
       { value: "Always", label: "Accessible" },
@@ -115,7 +111,9 @@ export function Audience() {
               )}
 
               <div className="text-4xl mb-4">{item.emoji}</div>
-              <div className={`text-xs font-bold uppercase tracking-widest ${item.accent} mb-2`}>
+              <div
+                className={`text-xs font-bold uppercase tracking-widest ${item.accent} mb-2`}
+              >
                 {item.tagline}
               </div>
               <h3 className="text-xl font-bold mb-4">{item.title}</h3>
@@ -127,10 +125,14 @@ export function Audience() {
               <div className="flex gap-6 mt-8 pt-6 border-t border-border/50">
                 {item.stats.map((stat, j) => (
                   <div key={j}>
-                    <div className={`text-2xl font-black stat-number ${item.accent}`}>
+                    <div
+                      className={`text-2xl font-black stat-number ${item.accent}`}
+                    >
                       {stat.value}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      {stat.label}
+                    </div>
                   </div>
                 ))}
               </div>

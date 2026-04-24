@@ -78,7 +78,7 @@ export function FAQ() {
                 ask most often.
               </p>
               <Link
-                href="#"
+                href="/contact"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-primary border border-primary/25 rounded-full px-5 py-2.5 hover:bg-primary/10 transition-colors"
               >
                 Contact us for more

@@ -88,11 +88,14 @@ export function FeaturesGrid() {
   const large = features.filter((f) => f.size === "lg");
   const small = features.filter((f) => f.size === "sm");
 
-  const LargeIcon0 = large[0].icon;
-  const LargeIcon1 = large[1].icon;
+  const LargeIcon0 = large[0]?.icon || Map;
+  const LargeIcon1 = large[1]?.icon || Map;
 
   return (
-    <section id="features" className="relative py-32 bg-card/30 section-rule overflow-hidden">
+    <section
+      id="features"
+      className="relative py-32 bg-card/30 section-rule overflow-hidden"
+    >
       <div className="absolute -bottom-40 right-0 w-[500px] h-[500px] bg-gradient-radial from-primary/5 to-transparent pointer-events-none rounded-full" />
 
       <div className="container mx-auto px-4">
@@ -116,7 +119,8 @@ export function FeaturesGrid() {
               </h2>
             </div>
             <p className="text-muted-foreground font-light text-lg max-w-xs leading-relaxed text-right hidden md:block">
-              Replacing manual cemetery management with structured digital workflows.
+              Replacing manual cemetery management with structured digital
+              workflows.
             </p>
           </div>
         </motion.div>

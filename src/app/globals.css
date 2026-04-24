@@ -72,6 +72,12 @@
     --gold-gradient-end: 0 0% 10%;
     --glow-color: 0 0% 0% / 0.15;
     --border-accent: 0 0% 0% / 0.2;
+    --border-accent-strong: 0 0% 0% / 0.5;
+
+    /* Shimmer variables - Light */
+    --shimmer-start: 0 0% 0%;
+    --shimmer-mid: 0 0% 40%;
+    --shimmer-end: 0 0% 0%;
   }
 
   .dark {
@@ -102,6 +108,12 @@
     --gold-gradient-end: 35 70% 50%;
     --glow-color: 40 70% 58% / 0.25;
     --border-accent: 40 70% 58% / 0.4;
+    --border-accent-strong: 40 70% 58% / 0.8;
+
+    /* Shimmer variables - Dark */
+    --shimmer-start: 40 80% 65%;
+    --shimmer-mid: 45 90% 75%;
+    --shimmer-end: 40 80% 65%;
   }
 }
 
@@ -184,7 +196,8 @@
   }
 
   .border-gold-strong {
-    border-color: hsl(var(--border-accent));
+    border-width: 2px;
+    border-color: hsl(var(--border-accent-strong));
   }
 
   /* Noise texture overlay */
@@ -235,7 +248,7 @@
 }
 
 .shimmer-text {
-  background: linear-gradient(90deg, hsl(0 0% 0%) 0%, hsl(0 0% 40%) 40%, hsl(0 0% 0%) 80%);
+  background: linear-gradient(90deg, hsl(var(--shimmer-start)) 0%, hsl(var(--shimmer-mid)) 40%, hsl(var(--shimmer-end)) 80%);
   background-size: 200% auto;
   background-clip: text;
   -webkit-background-clip: text;

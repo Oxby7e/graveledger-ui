@@ -154,7 +154,7 @@ export function Pricing() {
               </div>
               <hr className="hr-gradient mb-8" />
               <Link
-                href="#"
+                href="/contact"
                 className="group flex items-center justify-between w-full text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
               >
                 Request a deployment quote

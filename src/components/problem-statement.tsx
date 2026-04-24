@@ -54,12 +54,19 @@ const containerVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
 };
 
 export function ProblemStatement() {
   return (
-    <section className="relative py-32 bg-background overflow-hidden section-rule">
+    <section
+      id="problem"
+      className="relative py-32 bg-background overflow-hidden section-rule"
+    >
       {/* Background accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial from-destructive/5 to-transparent pointer-events-none" />
 

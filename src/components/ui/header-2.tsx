@@ -12,7 +12,7 @@ export function Header() {
 	const scrolled = useScroll(20);
 
 	const links = [
-		{ label: 'Problem', href: '#' },
+		{ label: 'Problem', href: '#problem' },
 		{ label: 'How It Works', href: '#how-it-works' },
 		{ label: 'Features', href: '#features' },
 		{ label: 'Smart Poles', href: '#pole-system' },

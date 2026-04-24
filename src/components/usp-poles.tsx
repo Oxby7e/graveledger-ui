@@ -3,7 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { ShieldCheck, Globe, Cpu, Anchor, CheckCircle2, Zap } from "lucide-react";
+import {
+  ShieldCheck,
+  Globe,
+  Cpu,
+  Anchor,
+  CheckCircle2,
+  Zap,
+} from "lucide-react";
 
 const highlights = [
   "One pole = one grave = one permanent source of truth",
@@ -45,7 +52,11 @@ const containerVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, x: 24 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
 };
 
 export function USPPoles() {
@@ -84,8 +95,12 @@ export function USPPoles() {
                 <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
                   <Zap className="w-4 h-4 text-primary shrink-0" />
                   <div>
-                    <div className="text-xs font-bold text-foreground">Pole ID: GL-A7-04821</div>
-                    <div className="text-xs text-muted-foreground">Linked • Active • Last Scanned 2h ago</div>
+                    <div className="text-xs font-bold text-foreground">
+                      Pole ID: GL-A7-04821
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      Linked • Active • Last Scanned 2h ago
+                    </div>
                   </div>
                   <div className="ml-auto w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 </div>

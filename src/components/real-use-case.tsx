@@ -98,7 +98,7 @@ export function RealUseCase() {
                 </div>
 
                 {/* Content */}
-                <div className={`pb-${step.connector ? "10" : "0"} flex-1`}>
+                <div className={`${step.connector ? "pb-10" : "pb-0"} flex-1`}>
                   <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/20 hover:shadow-lg transition-all duration-300">
                     <div className="flex-1">
                       <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">
