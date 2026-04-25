@@ -40,7 +40,7 @@ const audiences = [
     description:
       "No more staff dependency, no manual directory searching. Scan a pole or type a name — and navigate directly to the grave with real-time precision.",
     stats: [
-      { value: "<5s", label: "Grave Location" },
+      { value: "<10s", label: "Grave Location" },
       { value: "Always", label: "Accessible" },
     ],
     border: "border-emerald-500/20",
