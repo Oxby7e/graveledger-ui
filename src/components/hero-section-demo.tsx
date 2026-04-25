@@ -6,10 +6,10 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 const stats = [
-  { value: "2M+", label: "Graves Unlocated Annually" },
-  { value: "68%", label: "Cemeteries Still Paper-Based" },
-  { value: "40yr", label: "Average Record Lifespan" },
-  { value: "0", label: "Standard Identification System" },
+  { value: "30–60 mins", label: "Time to locate older burial records" },
+  { value: "30%", label: "Records Missing or Incomplete" },
+  { value: "10–20 yrs", label: "Grave Reuse Without Tracking" },
+  { value: "0", label: "Unified Identification System" },
 ];
 
 const HeroSectionDemo = () => {

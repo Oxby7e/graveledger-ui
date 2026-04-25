@@ -51,6 +51,7 @@ export default function RootLayout({
       <body
         className="min-h-full flex flex-col"
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"

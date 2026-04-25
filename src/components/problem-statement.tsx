@@ -6,40 +6,40 @@ import { TrendingDown, FileX, MapPinOff, UserX } from "lucide-react";
 
 const crises = [
   {
-    stat: "68%",
-    label: "of cemeteries have no digital system",
+    stat: "30–60 min",
+    label: "to locate older burial records",
     detail:
-      "Paper registers remain the primary — often only — source of burial information in most municipalities.",
+      "Most cemeteries rely on handwritten registers and staff memory to find graves, making retrieval slow and inconsistent.",
     icon: FileX,
     color: "from-red-500/10 to-red-500/5",
     borderColor: "border-red-500/20",
     statColor: "text-red-400",
   },
   {
-    stat: "1 in 3",
-    label: "records are incomplete or inaccurate",
+    stat: "Paper-based",
+    label: "record systems with no backup",
     detail:
-      "Manual data entry errors, torn pages, and water-damaged registers leave families and administrators without answers.",
+      "Registers are often torn, water-damaged, or incomplete, with no digital copies — leading to permanent data loss.",
     icon: TrendingDown,
     color: "from-orange-500/10 to-orange-500/5",
     borderColor: "border-orange-500/20",
     statColor: "text-orange-400",
   },
   {
-    stat: "40+ yrs",
-    label: "before physical markers deteriorate",
+    stat: "10–20 yrs",
+    label: "grave reuse without history tracking",
     detail:
-      "Without a digital anchor, grave markers fade, fall, or are relocated — severing the only identity link.",
+      "In urban cemeteries, graves are reused over time, but previous burials are rarely recorded or preserved.",
     icon: MapPinOff,
     color: "from-amber-500/10 to-amber-500/5",
     borderColor: "border-amber-500/20",
     statColor: "text-amber-400",
   },
   {
-    stat: "0 std.",
-    label: "global identification protocol exists",
+    stat: "No standard",
+    label: "grave identification system",
     detail:
-      "No universal format, no interoperability, no way to verify burial records across institutions.",
+      "Each cemetery uses its own method — no unified IDs, no interoperability, and no way to verify records across systems.",
     icon: UserX,
     color: "from-rose-500/10 to-rose-500/5",
     borderColor: "border-rose-500/20",
