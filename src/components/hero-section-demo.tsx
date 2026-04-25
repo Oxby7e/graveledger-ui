@@ -69,7 +69,7 @@ const HeroSectionDemo = () => {
         {/* Badge */}
         <motion.div variants={itemVariants}>
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold tracking-widest text-primary uppercase mb-8 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             GraveLedger — Infrastructure for the Sacred
           </span>
         </motion.div>
